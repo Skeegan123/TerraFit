@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Workout</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+</head>
+
+<body>
+    <div id="spinner" style="display:none;">
+        <!-- Replace with your spinner design -->
+        Loading...
+    </div>
+
+    <div class="container">
+        <div class="sub-container">
+            <div class="header">
+                <button class="back-button">&lt;</button>
+                <h2>Add Workout</h2>
+                <img src="../images/profile-pic.jpeg" alt="User's profile image" class="profile-image">
+            </div>
+
+            <form id="fitness-form">
+                <div class="question-container">
+                    <h3>What's your fitness experience level?</h3>
+                    <p>Please choose one option.</p>
+
+                    <div class="options">
+
+                        <div class="option">
+                            <input type="radio" id="beginner" name="level" value="Beginner">
+                            <label for="beginner">
+                                <span>Beginner</span>
+                                <p>(New to working out)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="intermediate" name="level" value="Intermediate">
+                            <label for="intermediate">
+                                <span>Intermediate</span>
+                                <p>(Some experience but looking to improve)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="advanced" name="level" value="Advanced">
+                            <label for="advanced">
+                                <span>Advanced</span>
+                                <p>(Experienced, looking for advanced routines)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="expert" name="level" value="Expert">
+                            <label for="expert">
+                                <span>Expert</span>
+                                <p>(Highly experienced, seeking challenging workouts)</p>
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="question-container hidden"> <!-- Added the 'hidden' class so it starts off hidden -->
+                    <h3>What's Specific Body Parts You Want to Train?</h3>
+                    <p>Please choose one option.</p>
+
+                    <div class="options">
+
+                        <div class="option">
+                            <input type="radio" id="full-body" name="focus" value="Full Body">
+                            <label for="full-body">
+                                <span>Full Body</span>
+                                <p>(Work on overall strength and fitness)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="upper-body" name="focus" value="Upper Body">
+                            <label for="upper-body">
+                                <span>Upper Body</span>
+                                <p>(Chest, arms, shoulders)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="legs-glutes" name="focus" value="Legs, glutes">
+                            <label for="legs-glutes">
+                                <span>Legs, glutes</span>
+                                <p>(Legs, glutes)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="core" name="focus" value="Core">
+                            <label for="core">
+                                <span>Core</span>
+                                <p>(Abdominals, lower back)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="cardio" name="focus" value="Cardio">
+                            <label for="cardio">
+                                <span>Cardio</span>
+                                <p>(Focus on cardiovascular health)</p>
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="custom" name="focus" value="Custom">
+                            <label for="custom">
+                                <span>Custom</span>
+                                <p>(Specify specific muscle groups or areas)</p>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Additional questions can be swapped here in the question-container -->
+            </form>
+        </div>
+        <footer>
+            <div class="bottom-logo">
+                <img src="../images/Logo-Dark.svg" alt="Logo">
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let isSubmitting = false;  // <-- Declare this variable outside of your DOMContentLoaded event.
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            function switchQuestionSet() {
+                const currentActive = document.querySelector('.question-container:not(.hidden)');
+                const nextSet = document.querySelector('.question-container.hidden');
+
+                if (currentActive && nextSet) {
+                    currentActive.classList.add('hidden');
+                    nextSet.classList.remove('hidden');
+                }
+            }
+
+            const options1 = document.querySelectorAll('.question-container:first-child .option input[type="radio"]');
+            options1.forEach(function (option) {
+                option.addEventListener('change', switchQuestionSet);
+            });
+
+            const options2 = document.querySelectorAll('.question-container:nth-child(2) .option input[type="radio"]');
+            options2.forEach(function (option) {
+                option.addEventListener('change', function () {
+                    if (!isSubmitting) {
+                        document.querySelector("form").dispatchEvent(new Event('submit'));
+                    }
+                });
+            });
+        });
+
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (isSubmitting) return;
+
+            isSubmitting = true;
+
+            const submitButton = document.querySelector("form [type='submit']");
+            if (submitButton) submitButton.setAttribute('disabled', 'disabled');
+
+            const spinner = document.getElementById('spinner');
+            if (spinner) spinner.style.display = 'block';
+
+            const formData = new FormData(event.target);
+            formData.append('user_id', '7');
+
+            const jsonData = JSON.stringify(Object.fromEntries(formData));
+
+            fetch("http://127.0.0.1:3000/api/workouts/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: jsonData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    localStorage.setItem('workoutData', JSON.stringify(data));
+                    window.location.href = "newWorkout.html";
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    if (submitButton) submitButton.removeAttribute('disabled');
+                    if (spinner) spinner.style.display = 'none';
+                    isSubmitting = false;  // <-- Reset the variable when there's an error.
+                });
+        });
+
+
+    </script>
+</body>
+
+</html>

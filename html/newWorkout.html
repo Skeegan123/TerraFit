@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>TerraFit</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sub-container">
+            <div class="header">
+                <button class="back-button">&lt;</button>
+                <h2>Your Workout</h2>
+                <img src="../images/profile-pic.jpeg" alt="User's profile image" class="profile-image">
+            </div>
+            <div class="workout">
+
+            </div>
+        </div>
+        <footer>
+            <div class="bottom-logo">
+                <img src="../images/Logo-Dark.svg" alt="Logo">
+            </div>
+        </footer>
+    </div>
+    <script>
+        let workoutData = JSON.parse(localStorage.getItem('workoutData'));
+
+        console.log(workoutData);
+        // Now use the workoutData in your JS as needed
+        localStorage.removeItem('workoutData');
+
+        // Create workout page based on workoutData
+        let workoutDiv = document.querySelector('.workout');
+        let workoutImg = document.createElement('img');
+        // random number 
+        let randomNum = Math.floor(Math.random() * 3) + 1;
+        workoutImg.src = "../images/workoutIMG" + randomNum + ".jpeg";
+        let workoutName = document.createElement('h1');
+        workoutName.textContent = workoutData.workout_title;
+        let workoutTime = document.createElement('p');
+        workoutTime.textContent = workoutData.estimated_time;
+        let equipmentTitle = document.createElement('h2');
+        equipmentTitle.textContent = "Required Equipment";
+        let requiredEquipment = document.createElement('p');
+        console.log(workoutData.required_equipment);
+        for (let i = 0; i < workoutData.required_equipment.length; i++) {
+            if (i == workoutData.required_equipment.length - 1) {
+                requiredEquipment.textContent += workoutData.required_equipment[i];
+            } else {
+                requiredEquipment.textContent += workoutData.required_equipment[i] + ", ";
+            }
+        }
+        requiredEquipment.textContent = workoutData.required_equipment;
+        let planTitle = document.createElement('h2');
+        planTitle.textContent = "Workout Plan";
+        let workoutPlan = document.createElement('div');
+        workoutPlan.classList.add('workout-plan');
+        let workoutPlanList = document.createElement('ul');
+        workoutPlanList.classList.add('workout-plan-list');
+        workoutData.plan.forEach((exercise) => {
+            console.log(exercise);
+            let exerciseLink = document.createElement('a');
+            exerciseLink.href = `../json/${exercise.title}.json`;
+            let exerciseItem = document.createElement('li');
+            exerciseItem.textContent = exercise.title;
+            exerciseLink.appendChild(exerciseItem);
+            workoutPlanList.appendChild(exerciseLink);
+        });
+        let startButton = document.createElement('button');
+        startButton.textContent = "Start Workout";
+        startButton.classList.add('start-button');
+
+        workoutDiv.appendChild(workoutImg);
+        workoutDiv.appendChild(workoutName);
+        workoutDiv.appendChild(workoutTime);
+        workoutDiv.appendChild(equipmentTitle);
+        workoutDiv.appendChild(requiredEquipment);
+        workoutDiv.appendChild(planTitle);
+        workoutPlan.appendChild(workoutPlanList);
+        workoutDiv.appendChild(workoutPlan);
+        workoutDiv.appendChild(startButton);
+
+    </script>
+</body>
+
+</html>

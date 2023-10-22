@@ -1,0 +1,326 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Space Grotesk', sans-serif;
+    /* background-color: #111; */
+    /* Disable Scroll */
+    overflow: hidden;
+}
+
+.onboarding-image1 {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../images/onboarding1.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.onboarding-image2 {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../images/onboarding2.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.onboarding-image3 {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../images/onboarding3.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.lg-1 {
+    width: 100svw;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.80) 1.95%, rgba(0, 0, 0, 0.00) 80%);
+    justify-content: space-between;
+    height: 100svh;
+}
+
+.lg-2 {
+    width: 100svw;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.80) 1.95%, rgba(0, 0, 0, 0.00) 80%);
+    justify-content: space-between;
+    height: 100svh;
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+    /* /* display: block; */
+    margin: 107px auto;
+    position: absolute;
+    bottom: 20px;
+}
+
+.onboarding-text {
+    text-align: center;
+    color: white;
+}
+
+.onboarding-title h1 {
+    color: #FFF;
+    text-align: center;
+    font-family: Space Grotesk;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.onboarding-subtitle h3 {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.60);
+    text-align: center;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    /* 20.8px */
+}
+
+.onboarding-subtitle {
+    width: 189px;
+    display: block;
+    margin: 0 auto;
+    margin-top: -20px;
+}
+
+.dot-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.di {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+
+.di-active {
+    background-color: #0077FF;
+    width: 40px;
+    /* Adjust this to your desired width for the pill shape */
+    height: 10px;
+    /* You might need to adjust height to get the perfect pill shape */
+    border-radius: 20px;
+    /* Setting this to half of the width ensures a consistent pill shape */
+    /* ... other properties if any ... */
+}
+
+.onboarding-button {
+    background-color: #0077FF;
+    /* padding: 10px 20px; */
+    text-align: center;
+    border-radius: 16px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+
+    display: flex;
+    padding: 20px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    width: 320px;
+}
+
+.onboarding-button h2 {
+    color: #FCFCFC;
+    font-family: Space Grotesk;
+    font-size: 23.29px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+}
+
+.onboarding-button:hover {
+    background-color: #0055cc;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 100svw;
+    height: 100svh;
+    max-width: 400px;
+    /* margin: 0 auto; */
+    /* padding: 20px; */
+}
+
+.sub-container {
+    padding: 20px;
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: lightgray 1px solid;
+}
+
+.header h2 {
+    color: #141414;
+    font-family: Space Grotesk;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.back-button {
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: gray 2px solid;
+    border-radius: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: lightgray 3px solid;
+}
+
+.question-container {
+    margin-top: 30px;
+    transition: opacity 0.3s ease-out;
+    /* 0.3s is the transition duration; adjust as desired */
+    max-height: 1000px;
+    /* A maximum height to facilitate the transition of the height */
+    overflow: hidden;
+    /* To ensure the content doesn't spill out during the transition */
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-in-out;
+}
+
+.question-container h3 {
+    color: #141414;
+    font-family: Space Grotesk;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.question-container p {
+    margin-top: -15px;
+    color: rgba(13, 13, 13, 0.60);
+    font-family: Space Grotesk;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.options {
+    margin-top: 20px;
+}
+
+.options input[type="radio"] {
+    display: none;
+}
+
+
+input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.options .option {
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.option label {
+    color: #0D0D0D;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+.option p {
+    margin: 0;
+    color: rgba(13, 13, 13, 0.60);
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.options input[type="radio"]:checked+label {
+    background-color: #eee;
+}
+
+footer {
+    margin-top: 280px;
+    text-align: center;
+}
+
+.options {
+    width: 100%;
+    /* Adjust as needed */
+}
+
+.hidden {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-in-out, visibility 0.3s ease-out;
+}
+
+.workout img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
