@@ -13,8 +13,7 @@
 
 <body>
     <div id="spinner" style="display:none;">
-        <!-- Replace with your spinner design -->
-        Loading...
+        <!-- Loading... -->
     </div>
 
     <div class="container">
@@ -177,6 +176,13 @@
 
             const spinner = document.getElementById('spinner');
             if (spinner) spinner.style.display = 'block';
+            // Center the spinner in the middle of the screen
+            if (spinner) spinner.style.position = 'absolute';
+            if (spinner) spinner.style.top = `${window.innerHeight / 2 - spinner.offsetHeight / 2}px`;
+            if (spinner) spinner.style.left = `${window.innerWidth / 2 - spinner.offsetWidth / 2}px`;
+
+            const container = document.querySelector('.container');
+            container.classList.add('hidden');
 
             const formData = new FormData(event.target);
             formData.append('user_id', '7');
