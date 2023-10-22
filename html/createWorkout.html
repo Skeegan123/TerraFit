@@ -124,6 +124,49 @@
                     </div>
                 </div>
 
+                <div class="question-container hidden">
+                    <h3>How much time do you have to work out?</h3>
+                    <p>Please choose one option.</p>
+
+                    <div class="options">
+
+                        <div class="option">
+                            <input type="radio" id="short" name="time" value="Short (15-30 minutes)">
+                            <label for="short">
+                                <span>Short (15-30 minutes)</span>
+                                <!-- <p>(15-30 minutes)</p> -->
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="medium" name="time" value="Medium (30-60 minutes)">
+                            <label for="medium">
+                                <span>Medium (30-60 minutes)</span>
+                                <!-- <p>(30-60 minutes)</p> -->
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="long" name="time" value="Long (1-2 hours)">
+                            <label for="long">
+                                <span>Long (1-2 hours)</span>
+                                <!-- <p>(1-2 hours)</p> -->
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input type="radio" id="very-long" name="time" value="Very Long (2+ hours)">
+                            <label for="very-long">
+                                <span>Very Long (2+ hours)</span>
+                                <!-- <p>(2+ hours)</p> -->
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
                 <!-- Additional questions can be swapped here in the question-container -->
             </form>
         </div>
@@ -135,30 +178,36 @@
     </div>
 
     <script>
-        let isSubmitting = false;  // <-- Declare this variable outside of your DOMContentLoaded event.
+        let isSubmitting = false;
 
         document.addEventListener("DOMContentLoaded", function () {
 
             function switchQuestionSet() {
                 const currentActive = document.querySelector('.question-container:not(.hidden)');
-                const nextSet = document.querySelector('.question-container.hidden');
+                const allContainers = Array.from(document.querySelectorAll('.question-container'));
+                const currentIndex = allContainers.indexOf(currentActive);
 
-                if (currentActive && nextSet) {
+                if (currentIndex !== -1 && currentIndex < allContainers.length - 1) {
+                    // Hide current and show next
                     currentActive.classList.add('hidden');
-                    nextSet.classList.remove('hidden');
+                    allContainers[currentIndex + 1].classList.remove('hidden');
                 }
             }
 
-            const options1 = document.querySelectorAll('.question-container:first-child .option input[type="radio"]');
-            options1.forEach(function (option) {
-                option.addEventListener('change', switchQuestionSet);
-            });
+            const allOptions = document.querySelectorAll('.question-container .option input[type="radio"]');
 
-            const options2 = document.querySelectorAll('.question-container:nth-child(2) .option input[type="radio"]');
-            options2.forEach(function (option) {
+            allOptions.forEach(function (option, index) {
                 option.addEventListener('change', function () {
-                    if (!isSubmitting) {
-                        document.querySelector("form").dispatchEvent(new Event('submit'));
+                    const parentContainer = option.closest('.question-container');
+                    const allContainers = Array.from(document.querySelectorAll('.question-container'));
+                    if (parentContainer === allContainers[allContainers.length - 1]) {
+                        // It's the last question, so we submit the form
+                        if (!isSubmitting) {
+                            document.querySelector("form").dispatchEvent(new Event('submit'));
+                        }
+                    } else {
+                        // Otherwise, move to the next question
+                        switchQuestionSet();
                     }
                 });
             });
